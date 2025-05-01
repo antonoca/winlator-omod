@@ -8,7 +8,7 @@ This is the new repository as the old one got deleted, will update the releases 
 
 # Installation
 
-1. Download and install the APK from [GitHub Releases](https://github.com/ant-on-a-oca/winlator-omod/releases/latest)
+1. Download and install the APK from [GitHub Releases](https://github.com/antonoca/winlator-omod/releases/latest)
 2. Launch the app and wait for the installation process to finish
 
 # Troubleshooting
