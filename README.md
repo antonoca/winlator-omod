@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="logo.png" width="376" height="128" alt="Winlator Logo" />  
+	<img src="logo.png" width="376" height="128" alt="Winlator" />  
 </p>
 
 `Winlator@Omod` is an experimental Android application that uses a customized build of Wine and box64 to run Windows Applications on Android devices.
