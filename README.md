@@ -2,13 +2,14 @@
 	<img src="omodlogo.png" width="376" height="128" alt="Winlator" />  
 </p>
 
-`Winlator@Omod` is an experimental Android application that uses a customized build of Wine and box64 to run Windows Applications on Android devices.
+Winlator@Omod is an Android application that lets you to run Windows (x86_64) applications with Wine and Box86/Box64. Originally from [BrunoSX](https://github.com/brunodev85/Winlator), modified by [antonoca](https://github.com/antonoca/)​
+
+Join us in our official Telegram channel [Click Here](https://t.me/omodreleases)​
 
 # Installation
-
-1. Download and install the APK from [GitHub Releases](https://github.com/antonoca/winlator-omod/releases/latest)
+1. Download and install the APK (signed.apk) from [GitHub Releases](https://github.com/antonoca/winlator-omod/releases/latest)
 2. Launch the app and wait for the installation process to finish
-3. Enjoy your applications or games on the application for Android
+3. Enjoy your applications or games on the application for Android!
 
 ----
 # Testing videos by the community.
@@ -49,3 +50,4 @@
 - D8VK ([github.com/AlpyneDreams/d8vk](https://github.com/AlpyneDreams/d8vk))
 - CNC DDraw ([github.com/FunkyFr3sh/cnc-ddraw](https://github.com/FunkyFr3sh/cnc-ddraw))
 - Ubuntu RootFs ([Focal Fossa](https://releases.ubuntu.com/focal))
+- Certain parts of the prefix - ([Ajay Prefix](https://github.com/ajay9634/Ajay-prefix))
