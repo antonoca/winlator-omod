@@ -28,6 +28,8 @@
 ## Ten Bells (Snapdragon 8 gen 3)
 [![Youtube](https://img.youtube.com/vi/yvhavPfdfLM/0.jpg)](https://www.youtube.com/watch?v=yvhavPfdfLM)
 
+**(ps. even tho the logo is different, the emulator is the same, i changed the logo. this is just the new repo as the old one got hacked and deleted, basically a new beginning.)**
+
 # Troubleshooting
 
 - If you are experiencing performance issues, try changing the Box64 preset to `Performance` in Container Settings -> Advanced Tab.
