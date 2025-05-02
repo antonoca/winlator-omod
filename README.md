@@ -2,6 +2,10 @@
 	<img src="lomodlogo.png" width="376" height="128" alt="Winlator" />  
 </p>
 
+<p align="left">
+  <img src="https://img.shields.io/github/downloads/antonoca/winlator-omod/total" alt="Total Downloads" width="150">
+</p>
+
 # Winlator@Omod
 Winlator@Omod is an Android application that lets you to run Windows (x86_64) applications with Wine and Box86/Box64. Originally from [BrunoSX](https://github.com/brunodev85/Winlator), modified by [antonoca](https://github.com/antonoca/)​
 
