@@ -10,6 +10,24 @@
 2. Launch the app and wait for the installation process to finish
 3. Enjoy your applications or games on the application for Android
 
+----
+# Testing videos by the community.
+
+## Biomorph 2025
+[![Youtube](https://img.youtube.com/vi/5VPGw3KTaiE/0.jpg)](https://www.youtube.com/watch?v=5VPGw3KTaiE)
+
+## Assassins Creed Origins (Snapdragon 8 gen 3)
+[![Youtube](https://img.youtube.com/vi/_QaRLDuOZGg/0.jpg)](https://www.youtube.com/watch?v=_QaRLDuOZGg)
+
+## Harvestella 2022 (Snapdragon 8 gen 3)
+[![Youtube](https://img.youtube.com/vi/rUaSPvY1HEA/0.jpg)](https://www.youtube.com/watch?v=rUaSPvY1HEA)
+
+## Sleeping Dogs (Snapdragon 8 gen 3)
+[![Youtube](https://img.youtube.com/vi/wQ__wGjtom8/0.jpg)](https://www.youtube.com/watch?v=wQ__wGjtom8)
+
+## Ten Bells (Snapdragon 8 gen 3)
+[![Youtube](https://img.youtube.com/vi/yvhavPfdfLM/0.jpg)](https://www.youtube.com/watch?v=yvhavPfdfLM)
+
 # Troubleshooting
 
 - If you are experiencing performance issues, try changing the Box64 preset to `Performance` in Container Settings -> Advanced Tab.
