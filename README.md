@@ -18,7 +18,7 @@ Join us in our official Telegram channel - [Click Here](https://t.me/omodrelease
 
 ---- 
 
-- signed-glibc.apk is the winlator 10 version fork with native glibc and the one who is continued mainly.
+- signed.apk is the winlator 10 version fork with native glibc and the one who is continued mainly.
 
 - signed-benchproot.apk is the winlator 9 version fork with proot + benchmark package name that does not require the user to uninstall the normal winlator and speeds up the games in certain devices. this is not recommended as it can ruin your phone as its like doing a very long benchmark so be careful with this version.
 
