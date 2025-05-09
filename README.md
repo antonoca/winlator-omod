@@ -12,11 +12,11 @@ Winlator@Omod is an Android application that lets you to run Windows (x86_64) ap
 Join us in our official Telegram channel - [Click Here](https://t.me/omodreleases)​
 
 # Installation
-1. Download and install the APK signed.apk or signed-benchproot.apk .
+1. Download and install the APK (signed.apk or signed-benchproot.apk).
 2. Launch the app and wait for the installation process to finish
 3. Enjoy your applications or games on the application for Android!
 
-[Latest signed.apk](https://github.com/https://github.com/antonoca/winlator-omod/releases/tag/8231f24)
+[Latest signed.apk](https://github.com/antonoca/winlator-omod/releases/tag/8231f24)
 
 [Latest signed-benchproot.apk](https://github.com/antonoca/winlator-omod/releases/tag/3d01ba8)
 
