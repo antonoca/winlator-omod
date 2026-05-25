@@ -365,6 +365,13 @@ class ContainerDetailViewModel(app: Application) : AndroidViewModel(app) {
 
     private fun refreshWineDependent(wineVersion: String) {
         val wineInfo = WineInfo.fromIdentifier(context, contentsManager, wineVersion)
+        if (wineInfo == null) {
+            isArm64EC = false
+            emulatorEnabled = false
+            box64VersionEntries = emptyList()
+            selectedBox64Version = ""
+            return
+        }
         isArm64EC    = wineInfo.isArm64EC()
         emulatorEnabled = isArm64EC
 
@@ -564,10 +571,13 @@ class ContainerDetailViewModel(app: Application) : AndroidViewModel(app) {
                 put("primaryController", selectedPrimaryController)
                 put("controllerMapping", controllerMapping)
             }
-            // createContainerAsync posts callback to main thread when done
             manager.createContainerAsync(data, contentsManager) { created ->
                 container = created
-                if (created != null) saveMouseWarp(created)
+                if (created != null) {
+                    saveMouseWarp(created)
+                } else {
+                    Toast.makeText(context, context.getString(R.string.creating_container) + " failed. Check Wine version and try again.", Toast.LENGTH_LONG).show()
+                }
                 onComplete()
             }
         }
