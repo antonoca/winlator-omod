@@ -65,7 +65,8 @@ public abstract class FileUtils {
     }
 
     public static String readString(File file) {
-        return new String(read(file), StandardCharsets.UTF_8);
+        byte[] data = read(file);
+        return data != null ? new String(data, StandardCharsets.UTF_8) : "";
     }
 
     public static String readString(Context context, Uri uri) {
@@ -165,7 +166,6 @@ public abstract class FileUtils {
                 for (String filename : filenames) {
                     if (!copy(new File(srcFile, filename), new File(dstFile, filename), callback)) {
                         Log.e(TAG, "Failed to copy directory: " + srcFile.getAbsolutePath());
-                        // Continue copying other files even if one fails
                     }
                 }
             }
@@ -182,7 +182,6 @@ public abstract class FileUtils {
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.e(TAG, "Failed to copy file: " + srcFile.getAbsolutePath() + " to " + dstFile.getAbsolutePath(), e);
-                // Log error but don't return false, so we skip this file and continue with others
                 return true;
             }
         }
@@ -193,7 +192,6 @@ public abstract class FileUtils {
 
     public static boolean copy(Context context, Object src, File dstFile, Callback<File> callback) {
         if (src instanceof File) {
-            // Handle File to File copying
             File sourceFile = (File) src;
             if (isSymlink(sourceFile)) return true;
             if (sourceFile.isDirectory()) {
@@ -224,7 +222,6 @@ public abstract class FileUtils {
                 }
             }
         } else if (src instanceof Uri) {
-            // Handle Uri to File copying, which requires a Context
             if (context == null) {
                 throw new IllegalArgumentException("Context is required for Uri to File copying");
             }
@@ -246,7 +243,6 @@ public abstract class FileUtils {
             }
         }
 
-        // Return false if src is neither File nor Uri
         return false;
     }
 
@@ -516,7 +512,6 @@ public abstract class FileUtils {
     public static File getFileFromUri(Context context, Uri uri) {
         Log.d(TAG, "getFileFromUri called with URI: " + uri.toString());
 
-        // Try to get the file path using the SAF method first
         String filePath = getFilePathFromUriUsingSAF(context, uri);
         if (filePath != null) {
             File file = new File(filePath);
@@ -525,11 +520,9 @@ public abstract class FileUtils {
             }
         }
 
-        // If the SAF method fails, try to open the URI directly
         try {
             InputStream inputStream = context.getContentResolver().openInputStream(uri);
             if (inputStream != null) {
-                // Create a temporary file to store the contents
                 File tempFile = File.createTempFile("restore_", ".tmp", context.getCacheDir());
                 try (FileOutputStream outputStream = new FileOutputStream(tempFile)) {
                     StreamUtils.copy(inputStream, outputStream);
@@ -540,7 +533,6 @@ public abstract class FileUtils {
             Log.e(TAG, "Failed to open URI: " + uri.toString(), e);
         }
 
-        // If all else fails, return null
         return null;
     }
     public static String getUriFileName(Context context, Uri uri) {
@@ -559,7 +551,6 @@ public abstract class FileUtils {
 
     public static boolean saveBitmapToFile(Bitmap bitmap, File file) {
         try (FileOutputStream out = new FileOutputStream(file)) {
-            // Compress the bitmap and write to the specified file
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.flush();
             return true;
