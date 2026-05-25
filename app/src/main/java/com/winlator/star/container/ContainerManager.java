@@ -32,7 +32,7 @@ public class ContainerManager {
     private final File homeDir;
     private final Context context;
 
-    private boolean isInitialized = false; // New flag to track initialization
+    private boolean isInitialized = false;
 
     public ContainerManager(Context context) {
         this.context = context;
@@ -42,7 +42,6 @@ public class ContainerManager {
         isInitialized = true;
     }
 
-    // Check if the ContainerManager is fully initialized
     public boolean isInitialized() {
         return isInitialized;
     }
@@ -51,7 +50,6 @@ public class ContainerManager {
         return containers;
     }
 
-    // Load containers from the home directory
     private void loadContainers() {
         containers.clear();
         maxContainerId = 0;
@@ -75,7 +73,7 @@ public class ContainerManager {
                     }
                 }
             }
-        } catch (JSONException | NullPointerException e) {
+        } catch (JSONException | NullPointerException | NumberFormatException e) {
             Log.e("ContainerManager", "Error loading containers", e);
         }
     }
@@ -94,7 +92,7 @@ public class ContainerManager {
     }
 
     public void createContainerAsync(final JSONObject data, ContentsManager contentsManager, Callback<Container> callback) {
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(Looper.getMainLooper());
         Executors.newSingleThreadExecutor().execute(() -> {
             final Container container = createContainer(data, contentsManager);
             handler.post(() -> callback.call(container));
@@ -102,7 +100,7 @@ public class ContainerManager {
     }
 
     public void duplicateContainerAsync(Container container, Runnable callback) {
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(Looper.getMainLooper());
         Executors.newSingleThreadExecutor().execute(() -> {
             duplicateContainer(container);
             handler.post(callback);
@@ -110,7 +108,7 @@ public class ContainerManager {
     }
 
     public void removeContainerAsync(Container container, Runnable callback) {
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(Looper.getMainLooper());
         Executors.newSingleThreadExecutor().execute(() -> {
             removeContainer(container);
             handler.post(callback);
@@ -136,18 +134,11 @@ public class ContainerManager {
                 return null;
             }
 
-//            // Extract the selected graphics driver files
-//            String driverVersion = container.getGraphicsDriverVersion();
-//            if (!extractGraphicsDriverFiles(driverVersion, containerDir, null)) {
-//                FileUtils.delete(containerDir);
-//                return null;
-//            }
-
             container.saveData();
             maxContainerId++;
             containers.add(container);
             return container;
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -160,7 +151,6 @@ public class ContainerManager {
         File dstDir = new File(homeDir, ImageFs.USER + "-" + id);
         if (!dstDir.mkdirs()) return;
 
-        // Use the refactored copy method that doesn't require a Context for File operations
         if (!FileUtils.copy(srcContainer.getRootDir(), dstDir, file -> FileUtils.chmod(file, 0771))) {
             FileUtils.delete(dstDir);
             return;
@@ -235,6 +225,7 @@ public class ContainerManager {
         File srcDir = new File(wineInfo.path + "/lib/wine/" + srcName);
 
         File[] srcfiles = srcDir.listFiles(file -> file.isFile());
+        if (srcfiles == null) return;
 
         for (File file : srcfiles) {
             String dllName = file.getName();
@@ -254,6 +245,11 @@ public class ContainerManager {
 
     public boolean extractContainerPatternFile(Container container, String wineVersion, ContentsManager contentsManager, File containerDir, OnExtractFileListener onExtractFileListener) {
         WineInfo wineInfo = WineInfo.fromIdentifier(context, contentsManager, wineVersion);
+        if (wineInfo == null) {
+            Log.e("ContainerManager", "WineInfo not found for version: " + wineVersion);
+            return false;
+        }
+
         String containerPattern = wineVersion + "_container_pattern.tzst";
         boolean result = TarCompressorUtils.extract(TarCompressorUtils.Type.ZSTD, context, containerPattern, containerDir, onExtractFileListener);
 
@@ -265,7 +261,7 @@ public class ContainerManager {
         if (result) {
             try {
                 if (wineInfo.isArm64EC())
-                    extractCommonDlls(wineInfo, "aarch64-windows", "system32", containerDir, onExtractFileListener); // arm64ec only
+                    extractCommonDlls(wineInfo, "aarch64-windows", "system32", containerDir, onExtractFileListener);
                 else
                     extractCommonDlls(wineInfo, "x86_64-windows", "system32", containerDir, onExtractFileListener);
 
@@ -280,13 +276,12 @@ public class ContainerManager {
     }
 
     public Container getContainerForShortcut(Shortcut shortcut) {
-        // Search for the container by its ID
         for (Container container : containers) {
             if (container.id == shortcut.getContainerId()) {
                 return container;
             }
         }
-        return null;  // Return null if no matching container is found
+        return null;
     }
 
         public void importContainer(File importDir, Runnable callback) {
@@ -297,7 +292,6 @@ public class ContainerManager {
                     return;
                 }
 
-                // Get the next container ID and set the new container name
                 int newContainerId = getNextContainerId();
                 String newContainerName = ImageFs.USER + "-" + newContainerId;
                 File newContainerDir = new File(homeDir, newContainerName);
@@ -312,14 +306,12 @@ public class ContainerManager {
                     return;
                 }
 
-                // Copy the files from the import directory to the new container directory
                 if (!FileUtils.copy(importDir, newContainerDir, file -> FileUtils.chmod(file, 0771))) {
                     FileUtils.delete(newContainerDir);
                     Log.e("ContainerManager", "Failed to copy container files to: " + newContainerDir.getPath());
                     return;
                 }
 
-                // Create the new container object and save its data
                 Container newContainer = new Container(newContainerId, this);
                 newContainer.setRootDir(newContainerDir);
                 newContainer.setName(importDir.getName());
@@ -328,7 +320,6 @@ public class ContainerManager {
                 maxContainerId++;
 
                 Log.d("ContainerManager", "Container imported successfully to: " + newContainerDir.getPath());
-                // Make sure to run the callback after successful import
                 if (callback != null) {
                     callback.run();
                 }
@@ -341,12 +332,11 @@ public class ContainerManager {
     public void exportContainer(Container container, Runnable callback) {
         Executors.newSingleThreadExecutor().execute(() -> {
             try {
-                // Create the export directory path
                 File exportDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Winlator/Backups/Containers");
 
                 if (!exportDir.exists() && !exportDir.mkdirs()) {
                     Log.e("ContainerManager", "Failed to create export directory: " + exportDir.getPath());
-                    runOnUiThread(() -> callback.run()); // Close the preloader dialog
+                    runOnUiThread(() -> callback.run());
                     return;
                 }
 
@@ -355,31 +345,30 @@ public class ContainerManager {
 
                 if (destinationDir.exists()) {
                     Log.e("ContainerManager", "Export directory already exists: " + destinationDir.getPath());
-                    runOnUiThread(() -> callback.run()); // Close the preloader dialog
+                    runOnUiThread(() -> callback.run());
                     return;
                 }
 
                 if (!destinationDir.mkdirs()) {
                     Log.e("ContainerManager", "Failed to create directory: " + destinationDir.getPath());
-                    runOnUiThread(() -> callback.run()); // Close the preloader dialog
+                    runOnUiThread(() -> callback.run());
                     return;
                 }
 
                 if (!FileUtils.copy(containerDir, destinationDir, file -> FileUtils.chmod(file, 0771))) {
                     Log.e("ContainerManager", "Failed to export some container files to: " + destinationDir.getPath());
-                    FileUtils.delete(destinationDir); // Optional: Delete partially copied directory
+                    FileUtils.delete(destinationDir);
                 }
 
                 Log.d("ContainerManager", "Container exported successfully to: " + destinationDir.getPath());
             } catch (Exception e) {
                 Log.e("ContainerManager", "Failed to export container: " + container.getName(), e);
             } finally {
-                runOnUiThread(callback); // Ensure the callback runs and preloader dialog closes
+                runOnUiThread(callback);
             }
         });
     }
 
-    // Utility method to run on UI thread
     private void runOnUiThread(Runnable action) {
         new Handler(Looper.getMainLooper()).post(action);
     }
@@ -387,5 +376,3 @@ public class ContainerManager {
 
 
 }
-
-
