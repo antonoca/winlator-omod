@@ -2115,7 +2115,6 @@ return true;
             if (property.nameAsString().contains("_MESA_DRV_GPU_NAME")) {
                 runOnUiThread(() -> {
                     if (frameRating != null) frameRating.setGpuName(property.toString());
-                    if (frameRatingHorizontal != null) frameRatingHorizontal.setRenderer(property.toString());
                 });
             }
         }
