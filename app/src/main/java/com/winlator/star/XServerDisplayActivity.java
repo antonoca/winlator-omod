@@ -922,7 +922,12 @@ public class XServerDisplayActivity extends AppCompatActivity {
                     }
                 }
                 preloaderDialog.closeOnUiThread();
-                AppUtils.restartApplication(getApplicationContext());
+                if (getIntent().getBooleanExtra("launched_from_frontend", false)) {
+                    finishAndRemoveTask();
+                    Runtime.getRuntime().exit(0);
+                } else {
+                    AppUtils.restartApplication(getApplicationContext());
+                }
             }
         }, 1000);
     }
