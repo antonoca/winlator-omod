@@ -2,7 +2,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/downloads/star-emu/star/total" alt="Total Downloads" width="150">
+  <img src="https://img.shields.io/github/downloads/winhub-emu/winhub/total" alt="Total Downloads" width="150">
 </p>
 
 <h1 align="center"> WinHub -
