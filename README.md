@@ -52,7 +52,6 @@ This fork stands on a long chain of prior work. Credit, in lineage order:
 | **Pipetto-crypto** | [Winlator Bionic fork](https://github.com/Pipetto-crypto/winlator) (the "Bionic" half of *Star Bionic*) and the upstream [Box64 fix branch](https://github.com/Pipetto-crypto/box64). Co-credited on cmod. |
 | **jacojayy** | Maintainer of the [WinHub](https://github.com/winhub-emul/winhub) line. Timeline Semaphore patches in the bundled Turnip driver for newer DXVK compatibility, ingame drawer redesign, file manager, imagefs and proton recompression, fps counter. Official site developer and mantainer. |
 | **vivsi** | Controller support contributions. |
-| **The412Banner** | Full Jetpack Compose UI migration, in-game overlay rewrite, controller-support restore (SDL2 SoName fix + four event files), Box64 edit-dialog fix, theme system, and CI/release infrastructure. Also maintains the [Nightlies WCP Hub](https://github.com/The412Banner/Nightlies) and [Banners-Turnip](https://github.com/The412Banner/Banners-Turnip). |
 | **StevenMX** | [Winlator-Ludashi](https://github.com/StevenMXZ/Winlator-Ludashi) and extensive cherry-picked work implemented in this build. This includes the Vulkan rendering path - which was still unreleased and unfinished at the time these builds and this repo were created, along with various other cherry-picked commits. |
 
 ### Upstream stack
