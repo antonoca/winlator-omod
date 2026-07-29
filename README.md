@@ -10,6 +10,9 @@ Windows applications and games, now on Android.</h1>
 
 **WinHub** is an open-source application that lets you play PC games on Android with the best performance possible. It lets you access your Steam, Amazon, GOG and Epic Games library on the go without any root or strange things. 
 
+> 📌 Please read [this](https://github.com/winhub-emu/winhub/releases/tag/star-winhub-progrwss) page.
+
+
 **Informations:**
 - **Package:** `com.winhub.dev` (standard), `com.tencent.ig` (pubg), `com.ludashi.benchmark` (ludashi)
 
