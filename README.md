@@ -5,10 +5,10 @@
   <img src="https://img.shields.io/github/downloads/winhub-emu/winhub/total" alt="Total Downloads" width="150">
 </p>
 
-<h1 align="center"> WinHub -
-Windows applications and games, now on Android.</h1>
+<h1 align="center"> ✨ WinHub -
+Your one-stop place for all your games, now on Android.</h1>
 
-**WinHub** is an open-source application that lets you play PC games on Android with the best performance possible. It lets you access your Steam, Amazon, GOG and Epic Games library on the go without any root or strange things. 
+**WinHub** is an open-source application that lets you play PC games on Android with the best performance possible. It lets you access your Steam, Amazon, GOG and Epic Games library on the go without any root or strange things. It also acts like a fully functional frontend, truly making it the one stop hub for all of your games.
 
 > 📌 Please read [this](https://github.com/winhub-emu/winhub/releases/tag/star-winhub-progrwss) page.
 
@@ -16,7 +16,7 @@ Windows applications and games, now on Android.</h1>
 **Informations:**
 - **Package:** `com.winhub.dev` (standard), `com.tencent.ig` (pubg), `com.ludashi.benchmark` (ludashi)
 
-- **Version:** `1.4-rebrand`
+- **Version:** `codename-ivoler`
 
 - **Android SDK:** `compileSdk 34`, `targetSdk 28`, `minSdk 26` (Android 8.0+)
 
